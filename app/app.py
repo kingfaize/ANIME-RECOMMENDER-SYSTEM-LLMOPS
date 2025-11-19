@@ -4,6 +4,7 @@ import streamlit as st
 from pipeline.pipeline import AnimeRecommendationPipeline
 from dotenv import load_dotenv
 import os
+from config.config import PROVIDERS, PROVIDER_MODELS
 
 
 
@@ -14,7 +15,7 @@ load_dotenv()
 
 
 st.sidebar.header("Model Provider Settings")
-provider = st.sidebar.selectbox("Select API Provider", ["Groq", "OpenAI"])
+provider = st.sidebar.selectbox("Select API Provider", PROVIDERS)
 
 
 # Embedding key input (always visible, operator can override env)
@@ -42,11 +43,7 @@ if provider == "Groq":
         st.sidebar.warning("Please provide a Groq API key.")
     model = st.sidebar.selectbox(
         "Model",
-        [
-            "llama-3.1-8b-instant",
-            "qwen/qwen3-32b",
-            "llama-3.3-70b-versatile"
-        ]
+        PROVIDER_MODELS[provider]
     )
     temperature = st.sidebar.slider(
         "Temperature",
@@ -68,15 +65,7 @@ elif provider == "OpenAI":
         st.sidebar.warning("Please provide an OpenAI API key.")
     model = st.sidebar.selectbox(
         "Model",
-        [
-            "gpt-5.1",
-            "gpt-5-mini",
-            "gpt-5-nano",
-            "gpt-5-pro",
-            "gpt-3.5-turbo",
-            "gpt-4",
-            "gpt-4-turbo"
-        ]
+        PROVIDER_MODELS[provider]
     )
     temperature = st.sidebar.slider(
         "Temperature",
