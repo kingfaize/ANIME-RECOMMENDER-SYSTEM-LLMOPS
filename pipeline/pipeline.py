@@ -1,6 +1,6 @@
 from src.vector_store import VectorStoreBuilder
 from src.recommender import AnimeRecommender
-from config.config import GROQ_API_KEY,MODEL_NAME
+from config.config import GROQ_API_KEY
 from utils.logger import get_logger
 from utils.custom_exception import CustomException
 
